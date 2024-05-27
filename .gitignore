@@ -1,7 +1,9 @@
-
 Data files
 Data/Pics/*
 Data/Credential/*
 
 Javascript files
 **/node_modules
+
+Misc
+push.sh
