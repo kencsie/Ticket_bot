@@ -2,6 +2,9 @@ Data files
 Data/Pics/*
 Data/Credential/*
 
+Python files
+**/__pycache__
+
 Javascript files
 **/node_modules
 
