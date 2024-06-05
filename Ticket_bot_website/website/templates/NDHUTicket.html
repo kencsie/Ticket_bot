@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <!-- Form for file upload -->
-   <div style="margin-top: 1%">
-       <h1>歡迎來到東華租借場地頁面</h1>
-       <p>請填入想要租借的場地，之後點選確定鍵</p>
-   </div>
-   
-   <div class="container mt-3">
-    <div class="row">
-        <!-- First Column -->
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title text-center">使用者帳號</h3>
-                    <form method="post" class="pt-3">
+    <div style="margin-top: 1%">
+        <h1>歡迎來到東華租借場地頁面</h1>
+        <p>請填入想要租借的場地，之後點選確定鍵</p>
+    </div>
+
+    <form method="post" class="container mt-3">
+        <div class="row">
+            <!-- First Column -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">使用者帳號</h3>
                         <div class="form-group">
                             <label for="username">學號</label>
                             <input type="text" class="form-control" name="username" id="username" required>
@@ -23,19 +21,17 @@
                             <label for="password">密碼</label>
                             <input type="password" class="form-control" name="password" id="password" required>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Second Column -->
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title text-center">租借選擇</h3>
-                    <form method="post" class="pt-3">
+            <!-- Second Column -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">租借選擇</h3>
                         <div class="form-group">
-                            <label for="rent_type">租借類型</label>
-                            <select class="form-control" id="rent_type" name="rent_type" onchange="updateCourts()" required>
+                            <label for="rentType">租借類型</label>
+                            <select class="form-control" id="rentType" name="rentType" onchange="updateCourts()" required>
                                 <option value="" selected disabled>請選擇</option>
                                 <option value="1">籃球</option>
                                 <option value="2">排球</option>
@@ -51,100 +47,129 @@
                                 <!-- Options will be populated by JavaScript -->
                             </select>
                         </div>
-                    </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Third Column -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">租借偏好</h3>
+                        <div class="form-group">
+                            <label for="timeSelection">時間選擇</label>
+                            <select class="form-control" id="timeSelection" name="timeSelection" onchange="toggleCustomTime(this)">
+                                <option value="firstTime">使用第一個時間</option>
+                                <option value="customTime">自定義時間</option>
+                            </select>
+                        </div>
+                        <div class="form-group d-none" id="customTimeInput">
+                            <label for="customTime">輸入時間</label>
+                            <input type="time" class="form-control" id="customTime" name="customTime">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+    </form>
 
     <script>
-      function updateCourts() {
-          var sportsToCourts = {
-              '1': [
-                  { 'name': '籃球場A', 'value': 'BSK0A' },
-                  { 'name': '籃球場B', 'value': 'BSK0B' },
-                  { 'name': '籃球場C', 'value': 'BSK0C' },
-                  { 'name': '籃球場D', 'value': 'BSK0D' },
-                  { 'name': '籃球場E', 'value': 'BSK0E' },
-                  { 'name': '籃球場F', 'value': 'BSK0F' },
-                  { 'name': '籃球場I (K書中心)', 'value': 'BSK0G' },
-                  { 'name': '籃球場J (K書中心)', 'value': 'BSK0H' },
-                  { 'name': '籃球場L (集賢館場地)', 'value': 'BSK0J' },
-                  { 'name': '籃球場K (集賢館場地)', 'value': 'BSK0K' },
-                  { 'name': '籃球場G (原R1)', 'value': 'BSKR1' },
-                  { 'name': '籃球場H (原R2)', 'value': 'BSKR2' }
-              ],
-              '2': [
-                  { 'name': '排球場A-女', 'value': 'VOL0A' },
-                  { 'name': '排球場B-男', 'value': 'VOL0B' },
-                  { 'name': '排球場C-女', 'value': 'VOL0C' },
-                  { 'name': '排球場D-男', 'value': 'VOL0D' },
-                  { 'name': '排球場E-女', 'value': 'VOL0E' },
-                  { 'name': '排球場F-男', 'value': 'VOL0F' },
-                  { 'name': '排球場G-女', 'value': 'VOL0G' },
-                  { 'name': '排球場H-男', 'value': 'VOL0H' },
-                  { 'name': '排球場L-女 (集賢館場地)', 'value': 'VOL0J' },
-                  { 'name': '排球場K-男 (集賢館場地)', 'value': 'VOL0K' },
-                  { 'name': '排球場I-女 (原R1)', 'value': 'VOLR1' },
-                  { 'name': '排球場J-男 (原R2)', 'value': 'VOLR2' }
-              ],
-              '3': [
-                  {'name': '柔道教室A', 'value': 'ARO0A'},
-                  {'name': '韻律教室', 'value': 'GYM0A'},
-                  {'name': '體育室前廣場', 'value': 'PLA0A'},
-                  {'name': '田徑場', 'value': 'TRK0A'}
-              ],
-              '4': [
-                  { "name": "壽豐館-舞蹈教室", "value": "XDNCE" },
-                  { "name": "壽館場B-羽1", "value": "XGMB1" },
-                  { "name": "壽館場B-羽2", "value": "XGMB2" },
-                  { "name": "壽館場B-羽3", "value": "XGMB3" },
-                  { "name": "壽館場B-羽4", "value": "XGMB4" },
-                  { "name": "壽館場C-排1", "value": "XGMC1" },
-                  { "name": "壽館場C-排2", "value": "XGMC2" },
-                  { "name": "壽館場C-排3", "value": "XGMC3" },
-                  { "name": "壽館場C-排4", "value": "XGMC4" },
-                  { "name": "壽館場A-籃球", "value": "XGYMA" },
-                  { "name": "壽豐館-跆拳道教室", "value": "XTKDO" },
-                  { "name": "壽豐體育館桌球室全部", "value": "XTT0W" }
-              ],
-              '5': [
-                  { "name": "網球場G", "value": "TNS0G" },
-                  { "name": "網球場H", "value": "TNS0H" },
-                  { "name": "網球場3", "value": "XTNB1" },
-                  { "name": "網球場4", "value": "XTNB2" },
-                  { "name": "網球場5", "value": "XTNB3" },
-                  { "name": "網球場6 (紅土)", "value": "XTNB4" },
-                  { "name": "網球場7 (紅土)", "value": "XTNB5" }
-              ],
-              '6': [
-                  {'name': '棒球場', 'value': 'BSB0A'}, 
-                  {'name': '高爾夫球場', 'value': 'BSK02'}, 
-                  {'name': '志學門壘球場1', 'value': 'SFT0B'}]
-          };
+        function updateCourts() {
+            var sportsToCourts = {
+                '1': [
+                    { 'name': '籃球場A', 'value': 'BSK0A' },
+                    { 'name': '籃球場B', 'value': 'BSK0B' },
+                    { 'name': '籃球場C', 'value': 'BSK0C' },
+                    { 'name': '籃球場D', 'value': 'BSK0D' },
+                    { 'name': '籃球場E', 'value': 'BSK0E' },
+                    { 'name': '籃球場F', 'value': 'BSK0F' },
+                    { 'name': '籃球場I (K書中心)', 'value': 'BSK0G' },
+                    { 'name': '籃球場J (K書中心)', 'value': 'BSK0H' },
+                    { 'name': '籃球場L (集賢館場地)', 'value': 'BSK0J' },
+                    { 'name': '籃球場K (集賢館場地)', 'value': 'BSK0K' },
+                    { 'name': '籃球場G (原R1)', 'value': 'BSKR1' },
+                    { 'name': '籃球場H (原R2)', 'value': 'BSKR2' }
+                ],
+                '2': [
+                    { 'name': '排球場A-女', 'value': 'VOL0A' },
+                    { 'name': '排球場B-男', 'value': 'VOL0B' },
+                    { 'name': '排球場C-女', 'value': 'VOL0C' },
+                    { 'name': '排球場D-男', 'value': 'VOL0D' },
+                    { 'name': '排球場E-女', 'value': 'VOL0E' },
+                    { 'name': '排球場F-男', 'value': 'VOL0F' },
+                    { 'name': '排球場G-女', 'value': 'VOL0G' },
+                    { 'name': '排球場H-男', 'value': 'VOL0H' },
+                    { 'name': '排球場L-女 (集賢館場地)', 'value': 'VOL0J' },
+                    { 'name': '排球場K-男 (集賢館場地)', 'value': 'VOL0K' },
+                    { 'name': '排球場I-女 (原R1)', 'value': 'VOLR1' },
+                    { 'name': '排球場J-男 (原R2)', 'value': 'VOLR2' }
+                ],
+                '3': [
+                    {'name': '柔道教室A', 'value': 'ARO0A'},
+                    {'name': '韻律教室', 'value': 'GYM0A'},
+                    {'name': '體育室前廣場', 'value': 'PLA0A'},
+                    {'name': '田徑場', 'value': 'TRK0A'}
+                ],
+                '4': [
+                    { "name": "壽豐館-舞蹈教室", "value": "XDNCE" },
+                    { "name": "壽館場B-羽1", "value": "XGMB1" },
+                    { "name": "壽館場B-羽2", "value": "XGMB2" },
+                    { "name": "壽館場B-羽3", "value": "XGMB3" },
+                    { "name": "壽館場B-羽4", "value": "XGMB4" },
+                    { "name": "壽館場C-排1", "value": "XGMC1" },
+                    { "name": "壽館場C-排2", "value": "XGMC2" },
+                    { "name": "壽館場C-排3", "value": "XGMC3" },
+                    { "name": "壽館場C-排4", "value": "XGMC4" },
+                    { "name": "壽館場A-籃球", "value": "XGYMA" },
+                    { "name": "壽豐館-跆拳道教室", "value": "XTKDO" },
+                    { "name": "壽豐體育館桌球室全部", "value": "XTT0W" }
+                ],
+                '5': [
+                    { "name": "網球場G", "value": "TNS0G" },
+                    { "name": "網球場H", "value": "TNS0H" },
+                    { "name": "網球場3", "value": "XTNB1" },
+                    { "name": "網球場4", "value": "XTNB2" },
+                    { "name": "網球場5", "value": "XTNB3" },
+                    { "name": "網球場6 (紅土)", "value": "XTNB4" },
+                    { "name": "網球場7 (紅土)", "value": "XTNB5" }
+                ],
+                '6': [
+                    {'name': '棒球場', 'value': 'BSB0A'}, 
+                    {'name': '高爾夫球場', 'value': 'BSK02'}, 
+                    {'name': '志學門壘球場1', 'value': 'SFT0B'}]
+            };
 
 
-          var sportType = document.getElementById('rent_type').value;
-          var courtDropdown = document.getElementById('court');
+            var sportType = document.getElementById('rentType').value;
+            var courtDropdown = document.getElementById('court');
 
-          // Clear existing options
-          courtDropdown.innerHTML = '';
+            // Clear existing options
+            courtDropdown.innerHTML = '';
 
-          // Add default option as the first option
-          var defaultOption = new Option("請選擇", "");
-          defaultOption.disabled = true; // Optional: make it unselectable
-          defaultOption.selected = true; // Automatically select this option
-          courtDropdown.appendChild(defaultOption);
+            // Add default option as the first option
+            var defaultOption = new Option("請選擇", "");
+            defaultOption.disabled = true; // Optional: make it unselectable
+            defaultOption.selected = true; // Automatically select this option
+            courtDropdown.appendChild(defaultOption);
 
-          // Populate the court dropdown
-          if (sportType && sportsToCourts[sportType]) {
-              sportsToCourts[sportType].forEach(function(court) {
-                  var option = new Option(court.name, court.value);
-                  courtDropdown.options.add(option);
-              });
-          }
-      }
+            // Populate the court dropdown
+            if (sportType && sportsToCourts[sportType]) {
+                sportsToCourts[sportType].forEach(function(court) {
+                    var option = new Option(court.name, court.value);
+                    courtDropdown.options.add(option);
+                });
+            }
+        }
+        function toggleCustomTime(selectElement) {
+            var customTimeInput = document.getElementById('customTimeInput');
+            if (selectElement.value === 'customTime') {
+                customTimeInput.classList.remove('d-none');
+            } else {
+                customTimeInput.classList.add('d-none');
+            }
+        }
     </script>
 
 {% endblock %}

@@ -9,8 +9,20 @@ views = Blueprint('views', __name__)
 def home():
     return render_template("home.html")
 
-@views.route('/NDHUTicket', methods=['GET'])
+@views.route('/NDHUTicket', methods=['GET', 'POST'])
 def NDHU_ticket():
+    if request.method == 'POST':
+        user_info = {
+        'username': request.form.get('username'), 
+        'password': request.form.get('password'), 
+        'rentType': request.form.get('rentType'), 
+        'court': request.form.get('court'), 
+        'timeSelection': request.form.get('timeSelection'),
+        'customTime': request.form.get('customTime')}
+
+        print(user_info)
+        return redirect(url_for('views.NDHU_ticket'))
+
     return render_template("NDHUTicket.html")
 
 @views.route('/THSRTicket', methods=['GET'])
