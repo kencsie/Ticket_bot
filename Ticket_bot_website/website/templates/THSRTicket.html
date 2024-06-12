@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="margin-top: 1%">
+        <h1>歡迎來到台灣高鐵訂票頁面</h1>
+        <p>請填入想要租借的場地，之後點選確定鍵</p>
+    </div>
+
+    <form method="post" class="container mt-3">
+        <div class="row">
+            <!-- First Column -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">使用者資訊</h3>
+                        <div class="form-group">
+                            <label for="ID">身分證字號</label>
+                            <input type="text" class="form-control" name="ID" id="ID" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Second Column -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">訂票資訊</h3>
+                        <div class="form-group">
+                            <label for="startStation">出發站</label>
+                            <select class="form-control" id="startStation" name="startStation" required>
+                                <option value="" selected disabled>請選擇</option>
+                                <option value="1">南港</option>
+                                <option value="2">台北</option>
+                                <option value="3">板橋</option>
+                                <option value="4">桃園</option>
+                                <option value="5">新竹</option>
+                                <option value="6">苗栗</option>
+                                <option value="7">台中</option>
+                                <option value="8">彰化</option>
+                                <option value="9">雲林</option>
+                                <option value="10">嘉義</option>
+                                <option value="11">台南</option>
+                                <option value="12">左營</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="destinationStation">抵達站</label>
+                          <select class="form-control" id="destinationStation" name="destinationStation" required>
+                              <option value="" selected disabled>請選擇</option>
+                              <option value="1">南港</option>
+                              <option value="2">台北</option>
+                              <option value="3">板橋</option>
+                              <option value="4">桃園</option>
+                              <option value="5">新竹</option>
+                              <option value="6">苗栗</option>
+                              <option value="7">台中</option>
+                              <option value="8">彰化</option>
+                              <option value="9">雲林</option>
+                              <option value="10">嘉義</option>
+                              <option value="11">台南</option>
+                              <option value="12">左營</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="typesofticket">行程類型</label>
+                          <select class="form-control" id="typesofticket" name="typesofticket">
+                              <option value="0" selected>單程</option>
+                              <option value="1">去回程</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="typesofCar">車廂種類</label>
+                          <select class="form-control" id="typesofCar" name="typesofCar">
+                              <option value="0" selected>標準車廂</option>
+                              <option value="1">商務車廂</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Third Column -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">訂票時間</h3>
+                        <div class="form-group">
+                            <label for="date">出發日期</label>
+                            <input type="date" class="form-control" id="date" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">出發時間</label>
+                            <select class="form-control" id="time" name="time" required>
+                              <option value="" selected disabled>請選擇</option>
+                              <option value="1201A">00:00</option>
+                              <option value="1230A">00:30</option>
+                              <option value="500A">05:00</option>
+                              <option value="530A">05:30</option>
+                              <option value="600A">06:00</option>
+                              <option value="630A">06:30</option>
+                              <option value="700A">07:00</option>
+                              <option value="730A">07:30</option>
+                              <option value="800A">08:00</option>
+                              <option value="830A">08:30</option>
+                              <option value="900A">09:00</option>
+                              <option value="930A">09:30</option>
+                              <option value="1000A">10:00</option>
+                              <option value="1030A">10:30</option>
+                              <option value="1100A">11:00</option>
+                              <option value="1130A">11:30</option>
+                              <option value="1200N">12:00</option>
+                              <option value="1230P">12:30</option>
+                              <option value="100P">13:00</option>
+                              <option value="130P">13:30</option>
+                              <option value="200P">14:00</option>
+                              <option value="230P">14:30</option>
+                              <option value="300P">15:00</option>
+                              <option value="330P">15:30</option>
+                              <option value="400P">16:00</option>
+                              <option value="430P">16:30</option>
+                              <option value="500P">17:00</option>
+                              <option value="530P">17:30</option>
+                              <option value="630P">18:30</option>
+                              <option value="700P">19:00</option>
+                              <option value="730P">19:30</option>
+                              <option value="600P">18:00</option>
+                              <option value="800P">20:00</option>
+                              <option value="830P">20:30</option>
+                              <option value="900P">21:00</option>
+                              <option value="930P">21:30</option>
+                              <option value="1000P">22:00</option>
+                              <option value="1030P">22:30</option>
+                              <option value="1100P">23:00</option>
+                              <option value="1130P">23:30</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fourth Column -->
+            <div class="col-md-3">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="card-title text-center">訂票人數</h3>
+                      <div class="form-group">
+                          <label for="fullFare">全票 </label>
+                          <select class="form-control" id="fullFare" name="fullFare" required>
+                              <option value="OF" selected>0</option>
+                              <option value="1F">1</option>
+                              <option value="2F">2</option>
+                              <option value="3F">3</option>
+                              <option value="4F">4</option>
+                              <option value="5F">5</option>
+                              <option value="6F">6</option>
+                              <option value="7F">7</option>
+                              <option value="8F">8</option>
+                              <option value="9F">9</option>
+                              <option value="10F">10</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="halfFare">孩童票 </label>
+                        <select class="form-control" id="halfFare" name="halfFare" required>
+                            <option value="OH" selected>0</option>
+                            <option value="1H">1</option>
+                            <option value="2H">2</option>
+                            <option value="3H">3</option>
+                            <option value="4H">4</option>
+                            <option value="5H">5</option>
+                            <option value="6H">6</option>
+                            <option value="7H">7</option>
+                            <option value="8H">8</option>
+                            <option value="9H">9</option>
+                            <option value="10H">10</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="disabledFare">愛心票 </label>
+                        <select class="form-control" id="disabledFare" name="disabledFare" required>
+                            <option value="OW" selected>0</option>
+                            <option value="1W">1</option>
+                            <option value="2W">2</option>
+                            <option value="3W">3</option>
+                            <option value="4W">4</option>
+                            <option value="5W">5</option>
+                            <option value="6W">6</option>
+                            <option value="7W">7</option>
+                            <option value="8W">8</option>
+                            <option value="9W">9</option>
+                            <option value="10W">10</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="seniorFare">敬老票 </label>
+                        <select class="form-control" id="seniorFare" name="seniorFare" required>
+                            <option value="OE" selected>0</option>
+                            <option value="1E">1</option>
+                            <option value="2E">2</option>
+                            <option value="3E">3</option>
+                            <option value="4E">4</option>
+                            <option value="5E">5</option>
+                            <option value="6E">6</option>
+                            <option value="7E">7</option>
+                            <option value="8E">8</option>
+                            <option value="9E">9</option>
+                            <option value="10E">10</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="studentFare">大學生票 </label>
+                        <select class="form-control" id="studentFare" name="studentFare" required>
+                            <option value="OP" selected>0</option>
+                            <option value="1P">1</option>
+                            <option value="2P">2</option>
+                            <option value="3P">3</option>
+                            <option value="4P">4</option>
+                            <option value="5P">5</option>
+                            <option value="6P">6</option>
+                            <option value="7P">7</option>
+                            <option value="8P">8</option>
+                            <option value="9P">9</option>
+                            <option value="10P">10</option>
+                        </select>
+                      </div>
+                  </div>
+              </div>        
+        </div>
+        <div class="row">
+          <!-- Fifth Column -->
+          <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">訂票偏好</h3>
+                    <div class="form-group">
+                      <label for="ticketTypeSelection">訂票選擇</label>
+                      <select class="form-control" id="ticketTypeSelection" name="ticketTypeSelection" onchange="toggleCustomTicketType(this)">
+                          <option value="firstTicket">使用第一個時間</option>
+                          <option value="customTicket">自定義車次</option>
+                      </select>
+                    </div>
+                    <div class="form-group d-none" id="customTicketInput">
+                      <label for="customTicket">輸入車次</label>
+                      <input type="number" class="form-control" id="customTicket" name="customTicket">
+                    </div>
+                </div>
+            </div>
+          </div>  
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+    </form>
+
+    <script>
+      function toggleCustomTicketType(selectElement) {
+            var customTimeInput = document.getElementById('customTicketInput');
+            if (selectElement.value === 'customTicket') {
+                customTimeInput.classList.remove('d-none');
+            } else {
+                customTimeInput.classList.add('d-none');
+            }
+        }
+    </script>
+
+{% endblock %}
