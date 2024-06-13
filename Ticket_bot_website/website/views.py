@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, current_app, request, redirect, url_for
+from flask import Blueprint, render_template, current_app, url_for, flash, request, redirect
 import json
 import os
+from .utility.ndhu_submit import submit_reservation
 
 views = Blueprint('views', __name__)
 
@@ -21,7 +22,19 @@ def NDHU_ticket():
         'timeSelection': request.form.get('timeSelection'),
         'customTime': request.form.get('customTime')}
 
-        print(user_info)
+        state = submit_reservation({
+            "username":user_info['username'], "password":user_info['password']}, 
+            user_info['rentType'], 
+            user_info['court'], 
+            user_info['date'], 
+            user_info['timeSelection'], 
+            user_info['customTime'])
+        
+        if state == True:
+            flash('成功：登記場地已經完成！', 'success')
+        else:
+            flash('錯誤：有地方出錯喔...', 'danger') 
+
         return redirect(url_for('views.NDHU_ticket'))
 
     return render_template("NDHUTicket.html")

@@ -77,6 +77,16 @@
         <div class="text-center mt-4">
             <button type="submit" class="btn btn-primary">提交</button>
         </div>
+        <!-- Flash messages section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="text-center alert alert-{{ category }} alert-dismissible fade show my-4" role="alert">
+                    <strong>{{ message }}</strong> 
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
     </form>
 
     <script>
